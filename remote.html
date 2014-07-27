@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Plex Cast Remote</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/remote.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+
+<body style="background-image: url('img/background.png')">
+	<div class="container" style="padding-top:20px;">
+		<div class="configure">
+			<div id="configure-form" class="form-cast">
+				<div style="font-size:25px; text-align:center; color:#4D4D4D">
+					<h1>Plex Cast Remote</h1>
+					<br>
+					<div id="cast_loading"class="spinner hide"></div>
+					<div id="cast_success" class="hide">Casting!</div>
+					<div id="cast_error" class="hide">Something went wrong :(</div>
+					<br>
+					<h2>Use your keyboard to control Plex!</h2>
+					<h3>
+					<p>Arrows : navigate</p>
+					<p>Shift + arrows : step back/fwd</p>
+	        		<p>Return : select</p>
+	        		<p>Escape : return</p>
+	        		<p>Space : play/pause</p>
+	        		<p>M : toggle OSD</p>
+	        		</h3>
+					<br>
+					<br>
+					<h4><strong style="color:#ff6600">TIPS :</strong> to open this page without casting a video, just open a new tab and click on the Plex Cast icon :)</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/remote.js"></script>
+	<script type="text/javascript" src="js/cast.js"></script>
+</body>
+
+</html>

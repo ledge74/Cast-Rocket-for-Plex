@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Plex Cast Settings</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/remote.css" rel="stylesheet">
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+		<div class="configure">
+			<h2>Plex Cast Settings</h2>
+	    	<div id="configure-form" class="form-configure form-cast well">
+	    		<div id="server-form" class="">
+	    			<h3>Server</h3>
+		        	<div class="form-group">
+		        		<label for="plexServer">Plex Server</label>
+		        		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="192.168.1.117"/>
+					</div>	
+					<p class="help-block">Enter the IP address of your Plex Server.</p>
+					<input class="btn btn-lg btn-custom btn-block" id="getClients" value="Get Clients"/>
+	        		<select id="plexServerID" name="plexServerID" class="form-control hide">
+	        			<option value="" selected>Waiting</option>
+	        		</select>
+					<br/>
+				</div>
+				<div id="client-form" class="hide">
+					<h3>Client</h3>
+					<div class="form-group">
+		        		<label for="plexClient">Plex Client</label>
+
+		        		<select id="plexClient" name="plexClient" class="form-control">
+		        			<option value="" selected>Select a Client</option>
+		        		</select>
+		        	</div>
+		        	<div class="form-group hide">
+		        		<label for="plexToken">Plex Token</label>
+		        		<input type="text" class="form-control" id="plexToken" name="plexToken" placeholder=""/>
+		        	</div>
+		        	<p class="help-block">Choose the Plex Client you want to cast to.</p>
+		        	<input class="btn btn-lg btn-custom btn-block" id="save" value="Save"/>
+		        </div>
+		        <div id="success-form" class="success hide">
+		        	<h1>Settings successfully saved! :)</h1>
+		        	<img src="img/logobig.png" width="30%">
+		        	<p>
+		        		Note : Do those steps again if you happen to change the "Require authentication on local networks" option in your PMS or if you want to change the client.
+		        	</p>
+		        </div>
+	      </div>
+	  </div>
+	  <div id="login">
+		<div id="login-form" class="well form-cast hide">
+			<h3>MyPlex Login</h3>
+			<p class="help-block">Your Plex Server requires authentication.</p>
+			<div class="form-group">
+				<label for="username">Username</label>
+				<input type="text" name="username" id="username" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" class="form-control"/>
+				<p class="help-block">Your password will not be stored and is transmitted over HTTPS.</p>
+			</div>
+			<div class="form-group">
+				<input type="submit" name="sub" id ="SubmitToken"value="Submit" class="btn btn-lg btn-custom btn-block"/>
+			</div>
+
+		</div>
+	  </div>
+    </div>
+    <script type="text/javascript" src="js/options.js"></script>
+</body>
+</html>
