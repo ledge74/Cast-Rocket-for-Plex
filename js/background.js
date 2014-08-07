@@ -1,16 +1,9 @@
 function PrepareToCast(tab) {
 
-	//Get current tab url and convert it to http
 	var VideoURL = tab.url;
 
-	chrome.tabs.create({
-		'url': chrome.extension.getURL('remote.html')
-	}, function(tab) {
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		  chrome.tabs.sendMessage(tabs[0].id, {castthis: VideoURL}, function(response) {
-		  });
-		});
-	});
+    chrome.tabs.update({url: chrome.extension.getURL('remote.html'), active: true});
+    setTimeout(function(){chrome.tabs.sendMessage(tab.id, {castthis: VideoURL}, function(response) {})},1000);
 }
 
 chrome.browserAction.onClicked.addListener(PrepareToCast);

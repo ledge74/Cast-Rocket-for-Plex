@@ -19,10 +19,10 @@
 	    			<h3>Server</h3>
 		        	<div class="form-group">
 		        		<label for="plexServer">Plex Server</label>
-		        		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="127.0.0.1"/>
+		        		<input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="ex: 127.0.0.1"/>
 					</div>	
 					<p class="help-block">Enter the IP address of your Plex Server.</p>
-					<input class="btn btn-lg btn-custom btn-block" id="getClients" value="Get Clients"/>
+					<button class="btn btn-lg btn-custom btn-block" id="getClients">Get Clients</button>
 	        		<select id="plexServerID" name="plexServerID" class="form-control hide">
 	        			<option value="" selected>Waiting</option>
 	        		</select>
@@ -42,7 +42,7 @@
 		        		<input type="text" class="form-control" id="plexToken" name="plexToken" placeholder=""/>
 		        	</div>
 		        	<p class="help-block">Choose the Plex Client you want to cast to.</p>
-		        	<input class="btn btn-lg btn-custom btn-block" id="save" value="Save"/>
+		        	<button class="btn btn-lg btn-custom btn-block" id="save">Save</button>
 		        </div>
 		        <div id="success-form" class="success hide">
 		        	<h1>Settings successfully saved! :)</h1>
@@ -67,7 +67,7 @@
 				<p class="help-block">Your password will not be stored and is transmitted over HTTPS.</p>
 			</div>
 			<div class="form-group">
-				<input type="submit" name="sub" id ="SubmitToken"value="Submit" class="btn btn-lg btn-custom btn-block"/>
+				<button type="submit" name="sub" id ="SubmitToken" class="btn btn-lg btn-custom btn-block">Submit</button>
 			</div>
 
 		</div>
