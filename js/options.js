@@ -102,6 +102,8 @@ $().ready(function () {
 				$.each($clients, function (i,item) {
 					var client = $("<option>", {
 						"value" : $(item).attr("host"),
+						"cname" : $(item).attr("name"),
+						"cport" : $(item).attr("port"),
 						"html" : $(item).attr("name") + " (" + $(item).attr("host") +")"
 					}).appendTo($("#plexClient"));
 				});
@@ -124,12 +126,17 @@ $("#save").click(function(e) {
 	$("#client-form").addClass("hide");
 	var s = $("#plexServer").val();
 	var c = $("#plexClient").val();
+	var n = $('option:selected', "#plexClient").attr('cname');
+	var p = $('option:selected', "#plexClient").attr('cport');
 	var i = $("#plexServerID").val();
+
 
 	var j = {
 		plexServer : s,
 		plexServerID : i,
-		plexClient : c
+		plexClient : c,
+		plexClientName : n,
+		plexClientPort : p
 	};
 
 	if (localStorage.getItem("plexToken")) {
@@ -139,6 +146,8 @@ $("#save").click(function(e) {
 	localStorage.setItem("plexServer", s);
 	localStorage.setItem("plexServerID", i);    
 	localStorage.setItem("plexClient", c);
+	localStorage.setItem("plexClientName", n);
+	localStorage.setItem("plexClientPort", p);
 
 	$("#success-form").removeClass("hide");
 
