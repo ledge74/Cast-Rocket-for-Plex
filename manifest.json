@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Plex Cast",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Cast almost any online video from your browser to your Plex device! Includes a remote to control your devices.",
 
   "browser_action": {

@@ -79,6 +79,7 @@ a, a:hover, a:active {
     height:5px;
     width: 80%;
     background: rgba(255,255,255,0.2);
+    cursor: pointer;
     border: none;
     outline: none;
     display:inline-block;
@@ -110,6 +111,7 @@ a, a:hover, a:active {
     height:5px;
     width: 70%;
     background: rgba(255,255,255,0.2);
+    cursor: pointer;
     border: none;
     outline: none;
     display:inline-block;

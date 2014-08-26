@@ -28,6 +28,7 @@ function make_base_auth(user, password) {
 }
 $().ready(function () {
 	$("#getClients").click(function(){
+	_gaq.push(['_trackEvent', "Options", 'New Configuration']);
 		$.ajax({
 			"url" : "http://" + $("#plexServer").val() + ":32400/",
 			"dataType" : "xml",
@@ -54,6 +55,7 @@ $().ready(function () {
 				xhr.setRequestHeader("X-Plex-Version", "1.0");
 			},
 			"success" : function (data) {
+				_gaq.push(['_trackEvent', "Options", 'Server OK']);
 				$("#plexServerID").empty();
 				something = $(data).find("MediaContainer");
 				var $clients = $(data).find("MediaContainer");
@@ -67,6 +69,7 @@ $().ready(function () {
 			},
 			"error" : function (jqXHR, textStatus, errorThrown) {
 				alert("Error");
+				_gaq.push(['_trackEvent', "Options", 'Server Error']);
 			}
 
 		});
@@ -96,6 +99,7 @@ $().ready(function () {
 				xhr.setRequestHeader("X-Plex-Version", "1.0");
 			},
 			"success" : function (data) {
+				_gaq.push(['_trackEvent', "Options", 'Client List OK']);
 				$("#plexClient").empty();
 				something = $(data).find("Server");
 				var $clients = $(data).find("Server");
@@ -113,6 +117,7 @@ $().ready(function () {
 			},
 			"error" : function (jqXHR, textStatus, errorThrown) {
 				alert("Error");
+				_gaq.push(['_trackEvent', "Options", 'Client List Error']);
 			}
 
 		});
@@ -123,6 +128,7 @@ $().ready(function () {
 $("#plexServer").val(localStorage.getItem("plexServer"));
 $("#plexClient").val(localStorage.getItem("plexClient"));
 $("#save").click(function(e) {
+	_gaq.push(['_trackEvent', "Options", 'Saved']);
 	$("#client-form").addClass("hide");
 	var s = $("#plexServer").val();
 	var c = $("#plexClient").val();
@@ -156,6 +162,7 @@ $("#save").click(function(e) {
 	e.preventDefault();
 });
 $("#SubmitToken").click(function(e) {
+	_gaq.push(['_trackEvent', "Options", 'GetToken']);
 	var username = $("#username").val();
 	var password = $("#password").val();
 	e.preventDefault();

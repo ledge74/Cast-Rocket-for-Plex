@@ -20,14 +20,15 @@ _gaq.push(['_trackPageview']);
 
 var plex = {};
 
-function sendPause(command) {
+function sendCommand(command) {
 	$.xhrPool.abortAll();
+	updateCommandID();
 		$.ajax({
-			"url" : "http://" + plex.plexClientIP + ":" + plex.plexClientPort + "/player/playback/" + command + "?type=video&commandID=" + commandid,
+			"url" : "http://" + plex.plexClientIP + ":" + plex.plexClientPort + "/player/" + plex.sendaction + "/" + command + "?commandID=" + commandid,
 			"dataType" : "text",
 			"type" : "GET",
+			"timeout" : 3000,
 			"beforeSend": function (xhr) {
-				$.xhrPool.push(xhr);
 			  	xhr.setRequestHeader("X-Plex-Token", localStorage.getItem("plexToken"));
 				xhr.setRequestHeader("X-Plex-Device", "Chrome Browser");
 				xhr.setRequestHeader("X-Plex-Model", "Plex Cast");
@@ -40,25 +41,42 @@ function sendPause(command) {
 				xhr.setRequestHeader("X-Plex-Version", "1.0");
 			},
 			"success" : function (data) {
-				console.log("command sent : " + command);
-			},
-			"complete" : function (xhr) {
-		       var index = $.xhrPool.indexOf(xhr);
-		        if (index > -1) {
-		            $.xhrPool.splice(index, 1);
-		        }
-				i++;
+				if (debug) console.log("command sent : " + command);
+				_gaq.push(['_trackEvent', "Command", command]);
 			}
 		});
 }
 
-function sendCommand(command) {
-	var cmdurl = "http://" + plex.plexServerIP + ":32400/system/players/" + plex.plexClientIP + "/" + plex.sendaction + "/" + command;
+$("#sendText").click(function() {
+  sendText($("#text2send").val());
+});
+
+function sendText(text) {
+	if (debug) console.log("sending text: " + $("#text2send").val());
 	$.xhrPool.abortAll();
-	$.get(cmdurl).error(function() {
-		console.log('Plex is not responding, troubleshooting tips:\n1) Veify server and client addresses\n2) Check network connectivity\n3) Reboot Plex Home Theater\n4) Reboot Plex Media Server');
+	updateCommandID();
+		$.ajax({
+			"url" : "http://" + plex.plexClientIP + ":" + plex.plexClientPort + "/player/application/setText?text=" + text + "&commandID=" + commandid,
+			"dataType" : "text",
+			"type" : "GET",
+			"timeout" : 3000,
+			"beforeSend": function (xhr) {
+			  	xhr.setRequestHeader("X-Plex-Token", localStorage.getItem("plexToken"));
+				xhr.setRequestHeader("X-Plex-Device", "Chrome Browser");
+				xhr.setRequestHeader("X-Plex-Model", "Plex Cast");
+				xhr.setRequestHeader("X-Plex-Client-Identifier", "Plex Cast");
+				xhr.setRequestHeader("X-Plex-Device-Name", "Plex Cast");
+				xhr.setRequestHeader("X-Plex-Platform", "Chrome");
+				xhr.setRequestHeader("X-Plex-Client-Platform", "Chrome");
+				xhr.setRequestHeader("X-Plex-Platform-Version", "1");
+				xhr.setRequestHeader("X-Plex-Product", "Plex Cast");
+				xhr.setRequestHeader("X-Plex-Version", "1.0");
+			},
+			"success" : function (data) {
+				if (debug) console.log("text sent : " + text);
+			}
 		});
-};
+}
 
 $(document).keydown(function(e) {
 	switch (e.which) {
@@ -189,18 +207,18 @@ plex.doCommand = function(action) {
 			if (isPlaying == "playing") {
 				GetMediaState("paused");
 				plex.sendaction = "playback";
-				sendPause("pause");
+				sendCommand("pause");
 			} else {
 				plex.state = "paused";
 				GetMediaState("playing");
 				plex.sendaction = "playback";
-				sendPause("play");
+				sendCommand("play");
 			}
 			break;
 
 		case "stop":
 			plex.sendaction = "playback";
-			sendPause("stop");
+			sendCommand("stop");
 			break;
 
 	}
