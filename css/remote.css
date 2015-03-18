@@ -1,40 +1,35 @@
 .form-cast {
 padding: 20px;
-background-color: rgba(0, 0, 0, 0.15);
 border-radius: 2px;
 border: 2px solid rgba(0, 0, 0, 0.15);
 box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.05);
 }
-label {
-color: #FFF;
-}
 
 body{
-	background-image: url('../img/background.png');
-	color:#fff;
   width: 100%;
   height: 100%;
 }
 
 .btn-custom {
-  background-color: hsl(360, 0%, 46%) !important;
+  background-color: #F25B6E !important;
+  color:#fff;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7f7f7f", endColorstr="#757575");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#7f7f7f), to(#757575));
-  background-image: -moz-linear-gradient(top, #7f7f7f, #757575);
-  background-image: -ms-linear-gradient(top, #7f7f7f, #757575);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7f7f7f), color-stop(100%, #757575));
-  background-image: -webkit-linear-gradient(top, #7f7f7f, #757575);
-  background-image: -o-linear-gradient(top, #7f7f7f, #757575);
-  background-image: linear-gradient(#7f7f7f, #757575);
-  border-color: #757575 #757575 hsl(360, 0%, 45%);
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#F25B6E), to(#F25B6E));
+  background-image: -moz-linear-gradient(top, #F25B6E, #F25B6E);
+  background-image: -ms-linear-gradient(top, #F25B6E, #F25B6E);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F25B6E), color-stop(100%, #F25B6E));
+  background-image: -webkit-linear-gradient(top, #F25B6E, #F25B6E);
+  background-image: -o-linear-gradient(top, #F25B6E, #F25B6E);
+  background-image: linear-gradient(#F25B6E, #F25B6E);
+  border-color: #a83d4b #a83d4b hsl(360, 0%, 45%);
   color: #fff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.06);
   -webkit-font-smoothing: antialiased;
 }
 
 a, a:hover, a:active {
-	color:#ff6600;
+	color:#F25B6E;
 	text-decoration: none;
 }
 
@@ -47,9 +42,8 @@ a, a:hover, a:active {
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  margin: 10px auto;
+  width: 30px;
+  height: 30px;
   background-color: #FFF;
 
   border-radius: 100%;  
@@ -78,8 +72,9 @@ a, a:hover, a:active {
 
 #volumeseeker {
     height:5px;
-    width: 80%;
-    background: black;
+    width: 78%;
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
     border: none;
     outline: none;
     display:inline-block;
@@ -87,8 +82,8 @@ a, a:hover, a:active {
 
 #volumeseeker .ui-slider-range-min {
     height:5px;
-    width: 80%;
-    background: #cc7b19;
+    width: 78%;
+    background: #dedede;
     border: none;
     outline: none;
     display:inline-block;
@@ -97,7 +92,7 @@ a, a:hover, a:active {
 #volumeseeker .ui-slider-handle {
     width: 15px;
     height: 15px;
-    background:#ffffff;
+    background:#F25B6E;
     border-radius:50%;
     margin-left: -10px;
     cursor: pointer;
@@ -109,8 +104,9 @@ a, a:hover, a:active {
 
 #timeseeker {
     height:5px;
-    width: 70%;
-    background: black;
+    width: 115%;
+    background: rgba(0,0,0,0.1);
+    cursor: pointer;
     border: none;
     outline: none;
     display:inline-block;
@@ -118,8 +114,8 @@ a, a:hover, a:active {
 
 #timeseeker .ui-slider-range-min {
     height:5px;
-    width: 70%;
-    background: #cc7b19;
+    width: 115%;
+    background: #dedede;
     border: none;
     outline: none;
     display:inline-block;
@@ -128,7 +124,7 @@ a, a:hover, a:active {
 #timeseeker .ui-slider-handle {
     width: 15px;
     height: 15px;
-    background:#ffffff;
+    background:#F25B6E;
     border-radius:50%;
     margin-left: -10px;
     cursor: pointer;
@@ -139,7 +135,60 @@ a, a:hover, a:active {
 }
 
 .timevol {
-  margin-left: 5px;
-  margin-right: 5px;
+  font-size: 10px;
   color: #999;
+}
+
+.glyphicon {
+  cursor: pointer;
+}
+
+.alert-player {
+cursor: pointer;
+position: absolute;
+top: 50%;
+left: 50%;
+width: 130px;
+height: 130px;
+margin: -65px 0 0 -65px;
+font-size: 60px;
+line-height: 142px;
+text-align: center;
+background-color: rgba(0,0,0,.7);
+border-radius: 10px;
+transition: opacity .2s,-webkit-transform .2s;
+}
+
+.mediathumb {
+position: absolute;
+bottom: 10px;
+left: 10px;
+height: 150px;
+}
+
+.video-background {
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.alert-info {
+cursor: pointer;
+position: absolute;
+color:white;
+top: 50%;
+left: 50%;
+width: 600px;
+height: 400px;
+margin: -200px 0 0 -300px;
+font-size: 20px;
+text-align: center;
+background-color: rgba(0,0,0,.7);
+border-radius: 10px;
+transition: opacity .2s,-webkit-transform .2s;
 }

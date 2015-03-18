@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/remote.css" rel="stylesheet">
+<link href="css/jquery-ui.css" rel="stylesheet">
+<style>
+body {
+    min-width:300px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+		<h3 class="align-center">Cast Rocket for Plex</h3>
+
+
+<div role="tabpanel">
+
+	<div class="alert alert-danger alert-dismissible hide" role="alert" id="serveralert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  Plex server isn't responding.
+	</div>
+
+	<div class="alert alert-warning alert-dismissible hide" role="alert" id="clientalert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  No Plex client found.
+	</div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    <li role="presentation"><a href="https://www.changetip.com/tipme/ledge74" target="_blank">Donate</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+    	<br>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-8">
+				<span style="font-size:11px">Casting to : </span><strong><p id="savedClient"></p></strong>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" id="cast" data-loading-text="Cast" class="btn btn-custom">Cast</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-2">
+				<span id="current" class="timevol">0:00:00</span>
+			</div>
+			<div class="col-xs-7" style="align:center">
+				<div id="timeseeker"></div>
+			</div>
+			<div class="col-xs-2">
+				<span id="duration" class="timevol" style="align:left">0:00:00</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4" style="text-align:right">
+				<br>
+				<span class="glyphicon glyphicon-stop" style="font-size:20px;padding-right:15px;" id="stopico"></span>
+				<span class="glyphicon glyphicon-play" style="font-size:20px;margin-right:-5px" id="playpauseico"></span>
+			</div>
+			<div class="col-xs-8">
+				<br>
+				<span id="volumeico" class="glyphicon glyphicon-volume-up" style="float:left; font-size: 20px;margin-right: 10px; "></span>
+				<div id="volumeseeker"></div>
+			</div>
+		</div>
+		<div class="row">
+		</div>
+
+	</div>
+
+
+
+		
+		<hr><p><strong>Choose Plex Client</strong></p>
+		<P><select id="plexClient" name="plexClient" class="form-control" style="">
+		</select></P>
+		<button type="button" id="save" class="btn btn-custom" data-loading-text="Saved!">Use Client</button>
+		<button type="button" id="update" data-loading-text="Updating..." class="btn btn-default">Update List</button>
+		<p> </p>
+		<p class="text-info" style="font-size:8px">TIPS: use your keyboard arrows, esc, space and return keys to navigate</p>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="settings">
+    	<br>
+		<p><strong>Plex Server</strong></p>
+		<div id="serverformip">
+		<div class="input-group">
+      	<input type="text" class="form-control" placeholder="ex 127.0.0.1" id="plexServer">
+      	<span class="input-group-btn">
+        <button class="btn btn-default" type="button" data-loading-text="Save!" id="SaveServer">Save!</button>
+      	</span>
+    	</div>
+    	<br>
+    	<span id="serverok" class="text-success hide">Server connected :)</span><span id="serverrerror" class="text-danger hide">Server timeout</span> <br>
+    	</div>
+    	<div id="serverformlogin" class="hide">
+		<h3>MyPlex Login</h3>
+		<p class="help-block">Your Plex Server requires authentication.</p>
+		<div class="form-group">
+		<label for="username">Username</label>
+		<input type="text" name="username" id="username" class="form-control"/>
+		</div>
+		<div class="form-group">
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" class="form-control"/>
+		</div>
+		<div class="form-group">
+		<button type="submit" name="sub" id ="MyPlexLogin" class="btn btn-custom" data-loading-text="Submit">Submit</button> <span id="loginerror" class="text-danger hide">Error: wrong login?</span>
+		</div>
+		</div>
+		<br>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
