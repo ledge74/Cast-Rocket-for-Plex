@@ -72,8 +72,13 @@ a, a:hover, a:active {
 
 #volumeseeker {
     height:5px;
+<<<<<<< HEAD
     width: 78%;
     background: rgba(0,0,0,0.1);
+=======
+    width: 80%;
+    background: rgba(255,255,255,0.2);
+>>>>>>> origin/master
     cursor: pointer;
     border: none;
     outline: none;
@@ -104,8 +109,13 @@ a, a:hover, a:active {
 
 #timeseeker {
     height:5px;
+<<<<<<< HEAD
     width: 115%;
     background: rgba(0,0,0,0.1);
+=======
+    width: 70%;
+    background: rgba(255,255,255,0.2);
+>>>>>>> origin/master
     cursor: pointer;
     border: none;
     outline: none;
