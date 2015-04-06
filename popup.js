@@ -1,8 +1,99 @@
 chrome.runtime.onMessage.addListener(
 function(request, sender, sendResponse) {
 SetButtonCasting(request.buttontext);
-console.log("response");
 //_gaq.push(['_trackEvent', "Cast", 'Clicked']);
+});
+
+!function ($) {
+
+    "use strict";
+
+    // PROGRESSBAR CLASS DEFINITION
+    // ============================
+
+    var Progressbar = function (element) {
+        this.$element = $(element);
+    }
+
+    Progressbar.prototype.update = function (value) {
+        var $div = this.$element.find('div');
+        var $span = $div.find('span');
+        $div.attr('aria-valuenow', value);
+        $div.css('width', value + '%');
+        $span.text(value + '% Complete');
+    }
+
+    Progressbar.prototype.finish = function () {
+        this.update(100);
+    }
+
+    Progressbar.prototype.reset = function () {
+        this.update(0);
+    }
+
+    // PROGRESSBAR PLUGIN DEFINITION
+    // =============================
+
+    $.fn.progressbar = function (option) {
+        return this.each(function () {
+            var $this = $(this),
+                data = $this.data('jbl.progressbar');
+
+            if (!data) $this.data('jbl.progressbar', (data = new Progressbar(this)));
+            if (typeof option == 'string') data[option]();
+            if (typeof option == 'number') data.update(option);
+        })
+    };
+
+    // PROGRESSBAR DATA-API
+    // ====================
+
+    $(document).on('click', '[data-toggle="progressbar"]', function (e) {
+        var $this = $(this);
+        var $target = $($this.data('target'));
+        var value = $this.data('value');
+
+        e.preventDefault();
+
+        $target.progressbar(value);
+    });
+
+}(window.jQuery);
+
+if (!localStorage["pauseHTML5video"]) {
+	localStorage.setItem("pauseHTML5video", "1");
+}
+
+if (localStorage["pauseHTML5video"] == 1) {
+	$('#pausevideosetting').prop('checked', true);
+}
+
+$("#pausevideosetting").change(function() {
+    if(this.checked) {
+        console.log("YEYEYE")
+        localStorage.setItem("pauseHTML5video", "1");
+    } else {
+    	console.log("NONONO")
+    	localStorage.setItem("pauseHTML5video", "0");
+    }
+});
+
+if (!localStorage["offsetHTML5video"]) {
+	localStorage.setItem("offsetHTML5video", "1");
+}
+
+if (localStorage["offsetHTML5video"] == 1) {
+	$('#offsetvideosetting').prop('checked', true);
+}
+
+$("#offsetvideosetting").change(function() {
+    if(this.checked) {
+        console.log("YEYEYE")
+        localStorage.setItem("offsetHTML5video", "1");
+    } else {
+    	console.log("NONONO")
+    	localStorage.setItem("offsetHTML5video", "0");
+    }
 });
 
 function ShowSavedClient() {
@@ -55,7 +146,6 @@ $.ajax({
 			}).appendTo($("#plexClient"));
 			$i++;
 		});
-		console.log(i);
 		if ($i == 0) {
 			$("#clientalert").removeClass("hide");
 		}
@@ -77,7 +167,41 @@ $.ajax({
 GetClientList();
 
 function SetButtonCasting(tab) {
-$('#cast').button('reset');
+	if (tab == "lookingformedia") {;
+		$("#progresstext").text("Looking for media...");
+		$("#progress-33").click();
+	}
+	console.log("CAST Response : " + tab);
+	if (tab == "medianotsupported") {
+		$("#progresstext").text("Error: Media isn't supported :(");
+		setTimeout(function(){
+			$('#cast').button('reset');
+			$('#collapseExample').collapse('hide');
+			$("#progress-00").click();
+		}, 1000);
+	}
+	if (tab == "mediasupported") {
+		$("#progresstext").text("Preparing to cast...");
+		$("#progress-66").click();
+	}
+	if (tab == "clientnotresponding") {
+		$("#progresstext").text("Error: Client isn't reponsing :(");
+		setTimeout(function(){
+			$('#cast').button('reset');
+			$('#collapseExample').collapse('hide');
+			$("#progress-00").click();
+		}, 1000);
+	}
+	if (tab == "casting") {
+		$("#progresstext").text("Casting :)");
+		$("#progress-100").click();
+		setTimeout(function(){
+			$('#cast').button('reset');
+			$('#collapseExample').collapse('hide');
+			$("#progress-00").click();
+			$("#progresstext").text("Please wait...");
+		}, 1000);
+	}
 }
 
 function ResetButtonSaved(tab) {
@@ -94,7 +218,6 @@ function UpdateClient() {
 	}
 	localStorage.setItem("plexClientName", truncatedname);
 	localStorage.setItem("plexClientPort", $('option:selected', "#plexClient").attr('cport'));
-	console.log("client saved");
 	ShowSavedClient();
 	setTimeout(ResetButtonSaved, 1000);
 };
@@ -104,9 +227,6 @@ function PrepareToCastWOR(tab) {
 	    
 	    var VideoURL = tabArray[0].url;
 	    var tabid = tabArray[0].id;
-
-	    console.log(VideoURL);
-	    console.log(tabid);
 
 	    $('#cast').button('loading');
 	    //chrome.tabs.update({url: chrome.extension.getURL('remote.html'), active: true});
@@ -284,7 +404,7 @@ if (localStorage["plexClientPort"]) {
 	var PlayerPort = "3005";
 }
 var ServerMachineID = localStorage["plexServerID"];
-var debug = true;
+var debug = false;
 var duration;
 var key_new = null;
 var key_old = null;
@@ -353,8 +473,6 @@ var ServerMachineID = localStorage["plexServerID"];
 			if ($(data).find('Timeline').eq(1).attr('state') == "playing") mediatype = 1; //Video
 			if ($(data).find('Timeline').eq(2).attr('state') == "playing") mediatype = 2; //Photo
 
-			console.log(mediatype);
-
 				//Monitor Media change
 				if (typeof $(data).find('Timeline').eq(mediatype).attr('key') !== 'undefined') key_new = $(data).find('Timeline').eq(mediatype).attr('key');
 
@@ -408,7 +526,6 @@ var ServerMachineID = localStorage["plexServerID"];
 						var current = $(data).find('Timeline').eq(mediatype).attr('time');
 						var duration = $(data).find('Timeline').eq(mediatype).attr('duration');
 						SaveDuration(duration);
-						console.log(duration);
 						UpdateSeekerValues(duration, current);
 					}
 				}
@@ -467,7 +584,6 @@ function UpdateSeekerValues(duration, current) {
 	var position = (current*100)/duration;
 	$("#duration").text(msToTime(duration));
 	$("#current").text(msToTime(current));
-	console.log(msToTime(current));
 	$("#timeseeker").slider("value", position);
 };
 

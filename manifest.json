@@ -1,13 +1,8 @@
 {
   "manifest_version": 2,
 
-<<<<<<< HEAD
   "name": "Cast Rocket for Plex",
-  "version": "1.2.4",
-=======
-  "name": "Plex Cast",
-  "version": "1.2.3",
->>>>>>> origin/master
+  "version": "1.2.5",
   "description": "Cast almost any online video from your browser to your Plex device! Includes a remote to control your devices.",
 
   "browser_action": {
@@ -21,6 +16,14 @@
     "128": "img/logo128.png"
   },
 
+	 "content_scripts": [{
+      "js": ["js/jquery.min.js", "contentscript.js"],
+	    "matches": ["*://*/*"]
+	}],
+    "web_accessible_resources": [
+        "popup.html"
+    ],
+
   "incognito":"spanning",
 
   "background": {
@@ -33,7 +36,8 @@
     "activeTab",
     "tabs",
     "https://*/",
-    "http://*/"
+    "http://*/",
+    "contextMenus"
   ],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }

@@ -15,8 +15,15 @@ body {
 
 		<h3 class="align-center">Cast Rocket for Plex</h3>
 
-
 <div role="tabpanel">
+
+
+        <p class="hide">
+            <button id="progress-00" data-toggle="progressbar" data-target="#myProgressbar" data-value="0" class="btn btn-default">0%</button>
+            <button id="progress-33" data-toggle="progressbar" data-target="#myProgressbar" data-value="33" class="btn btn-default">33%</button>
+            <button id="progress-66" data-toggle="progressbar" data-target="#myProgressbar" data-value="66" class="btn btn-default">66%</button>
+            <button id="progress-100" data-toggle="progressbar" data-target="#myProgressbar" data-value="100" class="btn btn-default">100%</button>
+        </p>
 
 	<div class="alert alert-danger alert-dismissible hide" role="alert" id="serveralert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -43,14 +50,28 @@ body {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-8">
-				<span style="font-size:11px">Casting to : </span><strong><p id="savedClient"></p></strong>
+				<span style="font-size:11px">Connected to : </span><strong><p id="savedClient"></p></strong>
 			</div>
 			<div class="col-xs-4">
-				<button type="button" id="cast" data-loading-text="Cast" class="btn btn-custom">Cast</button>
+				<button type="button" id="cast" data-loading-text="Cast" class="btn btn-custom" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Cast</button>
 			</div>
 		</div>
 	</div>
 
+	<div class="container-fluid">
+		<div class="collapse" id="collapseExample">
+			<div class="row">
+				<div class="col-xs-12">
+					<h5 id="progresstext">Please wait...</h5>
+				    <div id="myProgressbar" class="progress">
+				      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+				        <span class="sr-only">0% Complete</span>
+				      </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -99,11 +120,23 @@ body {
 		<div class="input-group">
       	<input type="text" class="form-control" placeholder="ex 127.0.0.1" id="plexServer">
       	<span class="input-group-btn">
-        <button class="btn btn-default" type="button" data-loading-text="Save!" id="SaveServer">Save!</button>
+        <button class="btn btn-custom" type="button" data-loading-text="Save!" id="SaveServer">Save!</button>
       	</span>
     	</div>
     	<br>
     	<span id="serverok" class="text-success hide">Server connected :)</span><span id="serverrerror" class="text-danger hide">Server timeout</span> <br>
+		<p><strong>HTML5 Video Settings</strong></p>
+		<div class="checkbox">
+			<label style="font-size:11px">
+				<input type="checkbox" id="pausevideosetting"> Pause video in web browser when Casting
+			</label>
+		</div>
+		<div class="checkbox">
+			<label style="font-size:11px">
+				<input type="checkbox" id="offsetvideosetting"> Continue playback at current time when Casting
+			</label>
+		</div>
+
     	</div>
     	<div id="serverformlogin" class="hide">
 		<h3>MyPlex Login</h3>
