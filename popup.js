@@ -1,3 +1,23 @@
+///////////////////////////////////////////
+/////////// Google Analytics //////////////
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-53208212-2']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+	var ga = document.createElement('script');
+	ga.type = 'text/javascript';
+	ga.async = true;
+	ga.src = 'https://ssl.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(ga, s);
+})();
+
+
+///////////////////////////////////////////
+/////////// REMOTE JAVASCRIPT /////////////
+
 chrome.runtime.onMessage.addListener(
 function(request, sender, sendResponse) {
 SetButtonCasting(request.buttontext);
@@ -174,6 +194,7 @@ function SetButtonCasting(tab) {
 	console.log("CAST Response : " + tab);
 	if (tab == "medianotsupported") {
 		$("#progresstext").text("Error: Media isn't supported :(");
+		_gaq.push(['_trackEvent', "Cast", 'Media error']);
 		setTimeout(function(){
 			$('#cast').button('reset');
 			$('#collapseExample').collapse('hide');
@@ -186,6 +207,7 @@ function SetButtonCasting(tab) {
 	}
 	if (tab == "clientnotresponding") {
 		$("#progresstext").text("Error: Client isn't reponsing :(");
+		_gaq.push(['_trackEvent', "Cast", 'Client error']);
 		setTimeout(function(){
 			$('#cast').button('reset');
 			$('#collapseExample').collapse('hide');
@@ -193,6 +215,7 @@ function SetButtonCasting(tab) {
 		}, 1000);
 	}
 	if (tab == "casting") {
+		_gaq.push(['_trackEvent', "Cast", 'Success']);
 		$("#progresstext").text("Casting :)");
 		$("#progress-100").click();
 		setTimeout(function(){
@@ -234,6 +257,7 @@ function PrepareToCastWOR(tab) {
 
 	    //chrome.runtime.sendMessage({castthis: VideoURL}, function(response) {});
 	    chrome.runtime.sendMessage({castthis: VideoURL}, function(response) {});
+	    _gaq.push(['_trackEvent', "Cast", 'Clicked']);
 	    //setTimeout(SetButtonCasting,1050);
 
     })
@@ -391,7 +415,7 @@ document.getElementById('update').onclick = GetClientList;
 chrome.runtime.onMessage.addListener(
 function(request, sender, sendResponse) {
 Cast(request.castthis);
-_gaq.push(['_trackEvent', "Cast", 'Clicked']);
+//_gaq.push(['_trackEvent', "Cast", 'Clicked']);
 });
 
 
